@@ -8,4 +8,9 @@
 ```bash
 django-admin startproject blogDjango  # 创建工程
 python manage.py runserver  # 启动 web 服务
+
+python manage.py makemigrations # 检查模型修改
+python manage.py migrate  # 数据迁移
+
+python manage.py createsuperuser  # 创建用户
 ```

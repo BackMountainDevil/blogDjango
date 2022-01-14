@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Category
 import markdown
 import re   # 正则化
 from django.utils.text import slugify   # 标题锚点美化，可显示中文

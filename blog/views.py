@@ -14,6 +14,7 @@ def index(request):
 def detail(request, pk):
     """将 Markdown 格式的文本解析成 HTML 文本"""
     post = get_object_or_404(Post, pk=pk)
+    post.increase_views()   # 阅读量 +1
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',

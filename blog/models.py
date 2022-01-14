@@ -84,6 +84,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = verbose_name  # 复数显示形式
+        ordering = ['-created_time']
 
     def __str__(self):
         return self.title

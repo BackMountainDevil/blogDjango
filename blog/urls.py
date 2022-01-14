@@ -4,6 +4,7 @@ from . import views
 
 app_name = 'blog'   # 视图函数命名空间
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('posts/<int:pk>/', views.detail, name='detail'),   # 文章详情页
+    path('', views.IndexView.as_view(), name='index'),
+    path('posts/<int:pk>/', views.PostDetailView.as_view(), name='detail'),   # 文章详情页
+    path('categories/<int:pk>/', views.CategoryView.as_view(), name='category'),    # 分类，To be test
 ]

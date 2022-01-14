@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
+
 
 class Category(models.Model):
     """
@@ -88,3 +90,7 @@ class Post(models.Model):
         """更新文章的修改时间为保存时刻"""
         self.modified_time = timezone.now()
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'pk': self.pk})
+

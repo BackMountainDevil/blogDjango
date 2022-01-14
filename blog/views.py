@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Category
+from .models import Post, Category, Tag
 import markdown
 import re   # 正则化
 from django.utils.text import slugify   # 标题锚点美化，可显示中文
@@ -17,6 +17,12 @@ class CategoryView(IndexView):
     def get_queryset(self):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView, self).get_queryset().filter(category=cate)
+
+
+class TagView(IndexView):
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)
 
 
 class PostDetailView(DetailView):

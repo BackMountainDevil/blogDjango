@@ -1,5 +1,6 @@
 certifi==2021.5.30
 Django==2.2.3
+django-pure-pagination==0.3.0
 Faker==11.3.0
 importlib-metadata==4.8.3
 Markdown==3.3.6

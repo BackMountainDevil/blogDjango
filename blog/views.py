@@ -5,9 +5,10 @@ import re   # 正则化
 from django.utils.text import slugify   # 标题锚点美化，可显示中文
 from markdown.extensions.toc import TocExtension
 from django.views.generic import ListView, DetailView
+from pure_pagination import PaginationMixin
 
 
-class IndexView(ListView):
+class IndexView(PaginationMixin, ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'

@@ -2,6 +2,7 @@ from django import template
 from ..models import Post, Category, Tag
 from django.db.models.aggregates import Count
 from blog.models import Category
+from django.db.models.functions import ExtractYear, ExtractMonth
 
 
 register = template.Library()
@@ -51,3 +52,10 @@ def show_tags(context):
     return {
         'tag_list': tag_list,
     }
+
+
+@register.inclusion_tag('blog/inclusions/_archives.html', takes_context=True)
+def show_archives(context):
+    '''统计各个月份的文章数'''
+    date_list = Post.objects.annotate(year=ExtractYear('created_time'), month=ExtractMonth('created_time')).values('year', 'month').order_by('year', 'month').annotate(num_posts=Count('id'))
+    return {'date_list': date_list,}

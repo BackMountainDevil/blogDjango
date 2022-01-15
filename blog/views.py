@@ -1,9 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Tag
 import markdown
-import re   # 正则化
-from django.utils.text import slugify   # 标题锚点美化，可显示中文
-from markdown.extensions.toc import TocExtension
 from django.views.generic import ListView, DetailView
 from pure_pagination import PaginationMixin
 
@@ -45,20 +42,4 @@ class PostDetailView(DetailView):
 
         # 视图必须返回一个 HttpResponse 对象
         return response
-
-    def get_object(self, queryset=None):
-        # 覆写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
-        post = super().get_object(queryset=None)
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            # 记得在顶部引入 TocExtension 和 slugify
-            TocExtension(slugify=slugify),
-        ])
-        post.body = md.convert(post.body)
-
-        m = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
-        post.toc = m.group(1) if m is not None else ''
-
-        return post
 

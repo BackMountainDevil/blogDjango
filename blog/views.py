@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Category, Tag
 import markdown
 from django.views.generic import ListView, DetailView
 from pure_pagination import PaginationMixin
+from django.contrib import messages
+from django.db.models import Q
 
 
 class IndexView(PaginationMixin, ListView):
@@ -43,3 +45,15 @@ class PostDetailView(DetailView):
         # 视图必须返回一个 HttpResponse 对象
         return response
 
+
+
+def search(request):
+    """简单的全文搜索"""
+    q = request.GET.get('q')
+    if not q:
+        error_msg = "请输入搜索关键词"
+        messages.add_message(request, messages.ERROR, error_msg, extra_tags='danger')
+        return redirect('blog:index')
+
+    post_list = Post.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
+    return render(request, 'blog/index.html', {'post_list': post_list})

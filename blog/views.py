@@ -52,14 +52,6 @@ class ArchiveView(IndexView):
         return super(IndexView, self).get_queryset().filter(created_time__year=self.kwargs.get('year'), created_time__month=self.kwargs.get('month'))
 
 
-def archive(request, year, month):
-    
-    post_list = Post.objects.filter(created_time__year=year,
-                                    created_time__month=month
-                                    ).order_by('-created_time')
-    return render(request, 'blog/index.html', context={'post_list': post_list})
-
-
 def search(request):
     """简单的全文搜索"""
     q = request.GET.get('q')

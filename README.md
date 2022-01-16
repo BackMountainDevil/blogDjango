@@ -1,6 +1,6 @@
 参考[HelloDjango - Django博客教程（第二版）](https://www.zmrenwu.com/courses/hellodjango-blog-tutorial/materials/59/)
 
-跳过三个部署教程和 HTTPS 证书，最后再整
+跳过三个部署教程和 HTTPS 证书，最后再整，全文搜索环节尝试 elasticsearch 5 暂时失利
 进入最后的测试环节前回到部署环节，里面对设置进行拆分为开发板和生产版
 
 ## 环境

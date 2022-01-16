@@ -23,4 +23,10 @@ python manage.py test # 运行测试
 
 python manage.py collectstatic # 收集静态文件
 gunicorn blogproject.wsgi -w 2 -k gthread -b 127.0.0.1:8000 # 启动 gunicorn
+
+# 统计测试覆盖率
+coverage erase  # 清除上一次的统计信息
+coverage run manage.py test # 运行 django 单元测试
+coverage report # 生成覆盖率统计报告
+coverage html # 生成 HTML 报告
 ```

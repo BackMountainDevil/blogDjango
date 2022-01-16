@@ -1,4 +1,5 @@
 certifi==2021.5.30
+coverage==6.2
 Django==2.2.3
 django-pure-pagination==0.3.0
 Faker==11.3.0

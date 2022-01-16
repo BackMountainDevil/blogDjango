@@ -46,8 +46,14 @@ class PostDetailView(DetailView):
         return response
 
 
-def archive(request, year, month):
+class ArchiveView(IndexView):
     """归档按月分类"""
+    def get_queryset(self):
+        return super(IndexView, self).get_queryset().filter(created_time__year=self.kwargs.get('year'), created_time__month=self.kwargs.get('month'))
+
+
+def archive(request, year, month):
+    
     post_list = Post.objects.filter(created_time__year=year,
                                     created_time__month=month
                                     ).order_by('-created_time')
